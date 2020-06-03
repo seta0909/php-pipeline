@@ -17,6 +17,25 @@ class HelloTest extends TestCase
         $this->assertEquals($result, 2);
     }
 
+    function testPipelineMultiple()
+    {
+        $value = 1;
+        $increment = function (int $value) {
+            return $value + 1;
+        };
+        $result = Pipeline::run(
+            $value,
+            $increment,
+            $increment,
+            $increment,
+            $increment,
+            $increment,
+            $increment,
+            $increment
+        );
+        $this->assertEquals($result, 8);
+    }
+
     function testPipelineNegative()
     {
         $value = -10;
